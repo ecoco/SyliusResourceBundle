@@ -36,7 +36,8 @@ stof_doctrine_extensions:
 services:
     # Gets rid of "[error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException"
     # errors in PHPUnit output when testing 404 errors.
-    logger: "@Psr\Log\NullLogger"
+    logger:
+        class: 'Psr\Log\NullLogger'
 
     test.translation_locale_provider:
         class: Sylius\Component\Resource\Translation\Provider\ImmutableTranslationLocaleProvider

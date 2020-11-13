@@ -16,7 +16,10 @@ namespace Sylius\Bundle\ResourceBundle\Tests\Resource;
 use AppBundle\Entity\Book;
 use AppBundle\Entity\ComicBook;
 use AppBundle\Repository\BookRepository;
+use AppBundle\Repository\BookAutoconfiguredRepository;
+use AppBundle\Repository\BookAutowiredRepository;
 use Doctrine\ORM\EntityManager;
+use Psr\Log\LoggerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -76,5 +79,28 @@ final class ResourceServicesTest extends WebTestCase
 
         $this->assertInstanceOf(RepositoryInterface::class, $repository);
         $this->assertSame($repository, $repositoryAlias);
+    }
+
+    /**
+     * @test
+     */
+    public function it_will_autowire_additional_repository_arguments()
+    {
+        $client = parent::createClient();
+        $repository = $client->getContainer()->get('app.repository.book_autowired');
+        $this->assertInstanceOf(BookAutowiredRepository::class, $repository);
+    }
+    /**
+     * @test
+     */
+    public function it_will_autoconfigure_repositories()
+    {
+        $client = parent::createClient();
+        /** @var BookAutoconfiguredRepository $repository */
+        $repository = $client->getContainer()->get('app.repository.book_autoconfigured');
+
+        $this->assertInstanceOf(BookAutoconfiguredRepository::class, $repository);
+
+        $this->assertInstanceOf(LoggerInterface::class, $repository->getLogger());
     }
 }

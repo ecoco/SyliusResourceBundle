@@ -49,6 +49,8 @@ final class DoctrineORMDriver extends AbstractDoctrineDriver
         $aliasId = $metadata->getServiceId('repository');
         $managerReference = new Reference($metadata->getServiceId('manager'));
         $definition = new Definition($repositoryClass);
+        $definition->setAutoconfigured(true);
+        $definition->setAutowired(true);
 
         if ($repositoryClass === EntityRepository::class) {
             $definition->setFactory([$managerReference, 'getRepository']);

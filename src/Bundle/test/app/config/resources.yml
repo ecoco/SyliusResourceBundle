@@ -21,3 +21,15 @@ sylius_resource:
         app.gedmo:
             classes:
                 model: AppBundle\Entity\GedmoExtendedExample
+
+
+        app.book_autowired:
+            classes:
+                model: AppBundle\Entity\Book
+                repository: AppBundle\Repository\BookAutowiredRepository
+
+
+        app.book_autoconfigured:
+            classes:
+                model:      AppBundle\Entity\Book
+                repository: AppBundle\Repository\BookAutoconfiguredRepository
