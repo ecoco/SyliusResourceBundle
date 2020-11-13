@@ -36,6 +36,8 @@ Contributing
 
 [This page](http://docs.sylius.com/en/latest/contributing/index.html) contains all the information about contributing to Sylius.
 
+[Run Test](docs/test.md) contains some basic instruction how run the tests and code analysis 
+
 Follow Sylius' Development
 --------------------------
 
